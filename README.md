@@ -1,1 +1,920 @@
-# guarani
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sentimientos en Guaraní con Música 🎵</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0e6d2 0%, #a7c796 100%);
+      text-align: center;
+      padding: 30px 20px;
+      color: #3a4a2b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #2f4a1e;
+      font-weight: 700;
+      font-size: 2.8rem;
+      text-shadow: 1px 1px 3px #8fbc8f;
+      margin-bottom: 5px;
+      font-family: 'Georgia', serif;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #475a31;
+      font-style: italic;
+      margin-bottom: 25px;
+    }
+
+    .busqueda-container {
+      background-color: #e7f1dd;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 10px rgba(45, 95, 35, 0.3);
+      width: 90%;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    input,
+    select,
+    button {
+      padding: 14px 18px;
+      font-size: 1.15rem;
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #7c9c5e;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.7);
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #4a7321;
+      box-shadow: 0 0 8px #8cbf26;
+      background-color: #f3f8e8;
+    }
+
+    button {
+      background-color: #4a7321;
+      color: #f0e6d2;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 8px #3b5b16;
+      user-select: none;
+    }
+
+    button:hover {
+      background-color: #6ca33c;
+      box-shadow: 0 6px 12px #5a8128;
+    }
+
+    .emoji-lupa {
+      font-size: 28px;
+      margin-top: -10px;
+      color: #537f3a;
+      user-select: none;
+    }
+
+    #resultado {
+      margin-top: 40px;
+      text-align: left;
+      max-width: 720px;
+      width: 90%;
+      background-color: #d9e7c8;
+      padding: 30px 35px;
+      border-radius: 18px;
+      box-shadow: 0 0 20px rgba(74, 115, 33, 0.5);
+      color: #2f4a1e;
+      font-family: 'Georgia', serif;
+      font-size: 1.15rem;
+      min-height: 100px;
+      line-height: 1.55;
+    }
+
+    .campo-titulo {
+      font-weight: 800;
+      margin-top: 25px;
+      margin-bottom: 8px;
+      color: #2f5d10;
+      text-shadow: 1px 1px 2px #a8c978;
+      font-size: 1.3rem;
+    }
+
+    .letra {
+      font-style: italic;
+      margin: 18px 0 30px 0;
+      font-size: 1.15rem;
+      white-space: pre-line;
+      color: #3d531a;
+      letter-spacing: 0.03em;
+    }
+
+    iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      border-radius: 12px;
+      margin-top: 22px;
+      box-shadow: 0 4px 10px rgba(58, 74, 43, 0.3);
+    }
+
+    section {
+      background-color: #e7f1dd;
+      width: 100%;
+      margin: 30px 0 15px 0;
+      padding: 22px 25px 22px 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(45, 95, 35, 0.3);
+      text-align: left;
+      font-family: 'Georgia', serif;
+      color: #2f4a1e;
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      border-bottom: 2px solid #6ca33c;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #3a5b1f;
+      text-shadow: 1px 1px 1px #a8c978;
+    }
+
+    blockquote {
+      font-style: italic;
+      color: #49632b;
+      margin: 12px 0 20px 0;
+      padding-left: 18px;
+      border-left: 5px solid #6ca33c;
+      font-size: 1.12rem;
+      font-family: 'Georgia', serif;
+      line-height: 1.5;
+    }
+
+    .inspiracion {
+      margin-top: 15px;
+      font-size: 1rem;
+      font-style: normal;
+      color: #38501b;
+      font-weight: 600;
+      line-height: 1.4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .dato-interesante {
+      margin-top: 25px;
+      background-color: #c5dd8f;
+      padding: 15px 20px;
+      border-radius: 12px;
+      color: #2f4a1e;
+      font-family: 'Georgia', serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 1.05rem;
+      box-shadow: 0 2px 6px rgba(80, 120, 30, 0.3);
+    }
+
+  </style>
+</head>
+<body>
+  <h1>🎧 Música según tu Sentimiento en Guaraní</h1>
+  <p>Escribe un sentimiento o elige uno de la lista desplegable</p>
+
+  <div class="busqueda-container">
+    <input type="text" id="inputSentimiento" placeholder="Ej: py’arasy o tristeza" />
+    <div class="emoji-lupa">🔍</div>
+    <select id="selectSentimiento" onchange="seleccionarSentimiento()">
+      <option value="">📋 Elegir sentimiento en Guaraní</option>
+      <option value="py’aguapy">py’aguapy</option>
+      <option value="py’arory">py’arory</option>
+      <option value="py’aho">py’aho</option>
+      <option value="py’apy">py’apy</option>
+      <option value="py’akuaã">py’akuaã</option>
+      <option value="py’akangy">py’akangy</option>
+      <option value="py’arasy">py’arasy</option>
+      <option value="py’atarova">py’atarova</option>
+      <option value="py’amirĩ">py’amirĩ</option>
+      <option value="py’aha’ã">py’aha’ã</option>
+      <option value="py’amokõi">py’amokõi</option>
+      <option value="py’atĩ">py’atĩ</option>
+      <option value="py’aguasu">py’aguasu</option>
+    </select>
+    <button onclick="buscar()">Buscar</button>
+  </div>
+
+  <div id="resultado">
+    <!-- Resultado aparecerá aquí -->
+  </div>
+
+  <script>
+    const sentimientos = {
+      "py’aguapy": {
+        guarani: "py’aguapy",
+        espanol: "paz interior, tranquilidad",
+        tema: "Jesús ou ogueru py’aguapy ha mborayhu yvyporakuérape.",
+        titulo: "Py’aguapy ha mborayhu",
+        escritor: "Versión de Lidio Vargas Riquelme - la música original es de Franz X. Gruber, con letra de Joseph Mohr",
+        cantante: "Coral - Ministerio Varsa",
+        letra: `Py’aguapy, ha mborayhu
+Amo yvágagui ou
+Oime onacéma Belénpe Jesu
+Amo yvágagui mbyja ogueru
+Py’aguapy ha tory,
+Py’aguapy ha tory.
+
+Py’aguapy ha mborayhu
+Mombyrýgui ñahendu,
+Oséma yvágagui purahéipu
+Ha yvy’ari omyasái tory
+Ndéve apurahéi, Jesu,
+Ndéve apurahéi, Jesu.
+
+Py’aguapy ha mborayhu
+Yvy ári ou Jesu
+Ou hendápe heta genteaty,
+Arandu kuera jopoi ogueru
+Ha henondépe oñesu,
+Omamba’e pe Jesu`,
+        poema: `Autor del poema es Lino Trinidad Sanabria.
+        
+Py’aguapy reko potĩ,
+Che pytu’u, che py’ã ári,
+Yvágare che remiandu,
+Oñembojeýva che rekove.
+
+Pytu’u porã, yvoty pyahu,
+Che korasõ oñemboja,
+Ndarekói mba’e mbyja,
+Peteĩ jey jeikove.
+
+Oñembohasa kuarahy,
+Oñemboty yvyrápe,
+Py’aguapy ohechauka,
+Che rehegua mborayhu.`,
+        inspiracion: [
+          "La verdadera paz nace desde dentro, no depende de lo externo.",
+          "Cada tormenta trae la oportunidad de renacer con más fuerza.",
+          "Deja que la serenidad calme tus pensamientos y abra tu corazón."
+        ],
+        dato: "En la cultura guaraní, 'py’aguapy' representa más que tranquilidad, es un estado profundo de equilibrio espiritual.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?q=Py%e2%80%99aguapy+ha+mborayhu&mid=E49F8C6159D5CFB3CB99E49F8C6159D5CFB3CB99&FORM=VIRE"
+      },
+      "py’arory": {
+        guarani: "py’arory",
+        espanol: "alegría, gozo",
+        tema: "La alegría y tradición paraguaya en torno al tereré, especialmente el “tereré jere”, que es la costumbre de compartir el tereré en círculo, entre amigos y familiares. La música exalta los momentos de unión, conversación, alegría y los sabores típicos de Paraguay, como la chipa, bife koygua, fariña, entre otros.",
+        titulo: "TERERÉ JERE",
+        escritor: "Ino Méndez",
+        cantante: "América 4 ",
+        letra: `Pyharevete ko ñane retâme 
+kuarahy omimbima ha ojope jope
+a más que asaje ñande rapyve
+ñande mbohy'ai ñande mboy'uhei.
+
+Oestira tirama algún alimento
+ku ñahenoiháicha terere rupa
+fariña kyra, tortilla, chipa
+bife koygua'yro pe ype rova
+terere en ronda ho'ysâ porâva
+mitâ ipohevea tove toytykua.
+
+Terere jere pohâ roy'sâre
+ogueru tory, ñane mbovy'a
+ñañe'e de futbol, de amor y placeres
+ayvupe la talla japuka hagua.
+
+Terere jere pohâ roy'sâre
+ñanemohesâi ha ñandejora
+ko mba'ehete ñane mba'eteva
+ñande Paraguaype anike ofalta.
+
+Kapi'i katî, kokû, perdurilla
+ka'aru rupe, para para'i
+ijosopyre ningo jahetema
+ikyre'yvea ke na tojapo.
+
+Guampa, jarra, y ho'ysâ porâ
+yerba y bombilla para el tereré.
+Ñambogue haguâ pe py'a raku
+jagueroko'êva farra oparire.
+Koyte domingo jaukena en ronda
+por turno y tras mano tove tojere`,
+        poema: `Py’arory che reheguáva,
+Yvytu hovy che pypeguáva,
+Nde resa rory che resape’a,
+Ha che rekove omimbi jey.
+
+Py’arory ohechauka,
+Peteĩ ára porãvéva,
+Che korasõ oñembyaty,
+Nde rehe che aiñe’ẽ.
+
+Tuvicha oheja pe py’arory,
+Peteĩ ára oñemopya’ỹva,
+Che rehegua ko che pytu’u,
+Peteĩ mba’e porã, py’arory.`,
+        inspiracion: [
+          "La alegría no es ausencia de problemas, sino la fuerza para superarlos.",
+          "Cada sonrisa es una victoria del alma sobre la adversidad.",
+          "Cultiva la alegría como un jardín que da frutos eternos."
+        ],
+        dato: "El 'py’arory' es celebrado en festivales tradicionales paraguayos como símbolo de renovación y esperanza.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=Terere+jere+-+Am%c3%a9rica+4&&mid=AAE6855C50BBBA4EFEA2AAE6855C50BBBA4EFEA2&&FORM=VRDGAR"
+      },
+      "py’aho": {
+        guarani: "py’aho",
+        espanol: "angustia",
+        tema: "La letra narra un trágico suceso de 1925, en el que Enrique Apolinar Barboza es asesinado por el padre de su amada, Iluminada Arias. La canción expresa profunda melancolía por la pérdida y es una de las guaranias más emblemáticas, considerada patrimonio cultural inmaterial.",
+        titulo: "NDE RENDAPE AJU",
+        escritor: " Manuel Ortiz Guerrero",
+        cantante: "José Asunción Flores",
+        letra: `Mombyry asyetégui aju nerendápe romomorã seguí
+ymaite guivéma reiko che py’ápe che esperansami
+mborayhu ha yuhéigui amanombotáma ko’ápe aguahêvo
+tañesûna ndéve ha nde poguivépa chemboy’umi.
+
+He’íva nde rehe los karia’y kuéra pe imandu’a hárupi
+kuña nde rorýva música porãicha naimbojojahái
+che katu ha’eva cada ka’aru nde rehe apensárõ
+ikatuva’erã piko che ichugui añembyesarái
+Yvoty nga’u hína ko che rekove
+aipo’o haguã rojapi pype.
+
+Ku clavel potýicha neporãitéva repukavymirõ
+neporãitevéva el alba potygui che esperansami
+Na tañemondéna jazmín memetégui che rayhu haguãicha
+ha ku che keguýpe che azucena blanca che añuami.
+Che azucena blanca ryakuãvurei,
+eju che azucena torohetûmi.`,
+
+        poema: `Che ñe’ẽ ogue, py’aho oguejy,
+Opa mba’e okirirĩ,
+Peteĩ mba’e añandúva:
+Che rehe ae oikuaa.
+
+Py’aho che korasõre,
+Che remiandu he’ẽ,
+Opa ára oñembohasa,
+Che ñemohendaha mba’e.
+
+Nde resa ohecha va’erã,
+Py’aho ohasa gueteri,
+Ha che korasõ oñeha’ã,
+Peteĩ mba’e oipytyvõva.`,
+        inspiracion: [
+          "Incluso en la oscuridad de la angustia, hay semillas de luz.",
+          "Permitir sentir es el primer paso para sanar.",
+          "No estás solo; compartir el peso aligera el alma."
+        ],
+        dato: "En guaraní, 'py’aho' se relaciona con la sensación física y emocional de opresión, muy presente en la poesía tradicional.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=Ne+Rend%c3%a1pe+Aju&&mid=C0F5EE5CFAED2E6744E0C0F5EE5CFAED2E6744E0&&FORM=VRDGAR"
+      },
+      "py’apy": {
+        guarani: "py’apy",
+        espanol: "preocupación",
+        tema: "La carga invisible que pesa en el pecho, vigilancia del alma ante lo incierto.",
+        titulo: "DESPIERTA MI ANGELINA",
+        escritor: "Emiliano R. Fernandez",
+        cantante: "Juan Carlos Oviedo y los hermanos acuña",
+        letra: `Despierta mi Angelina fragancia de azucena
+lucero ya osëma nde resáicha oyayái
+epu'äna ejhechami co yvága omimbipáva
+mba'e ñane encantaba jazmín del Paraguay.
+ 
+Despierta mi Angelina que aquí en tu ventana
+péina guyra campana ne rokëme oyeroky
+jha iyïkere mainumby clavelina iyurúpe
+purajhéi musicapúpe ne mombáy the Tupäsy.
+ 
+Despierta mi Angelina fragancia de azucena
+lucero ya osëma nde resáicha oyayái
+epu'äna ejhechami co yvága omimbipáva
+mba'e ñane encantaba jazmín del Paraguay.
+ 
+Despierta mi Angelina que aquí en tu ventana
+péina guyra campana ne rokëme oyeroky
+jha iyïkere mainumby clavelina iyurúpe
+purajhéi musicapúpe ne mombáy the Tupäsy.`,
+        poema: `Py’apy ha sapy’apy,
+Che resa hovy’ỹ,
+Peteĩ pyhareve iñakãasy,
+Ndaihecháiva pytã.
+
+Che korasõ ojapohápe,
+Peteĩ mba’e ikatúva,
+Oñembohasa che rehe,
+Ha che ñe’ẽ oñe’ẽ.
+
+Py’apy oñeha’ã gueteri,
+Che rehegua mbyja,
+Ha che py’a oñembyasy,
+Che rehegua jehecha.`,
+        inspiracion: [
+          "La preocupación muestra que te importa, pero no permitas que te paralice.",
+          "Confía en tus fuerzas y deja ir lo que no puedes controlar.",
+          "Respira profundo y vuelve a enfocarte en lo que realmente importa."
+        ],
+        dato: "Los cantos guaraníes muchas veces reflejan la preocupación como parte del proceso humano de adaptación y aprendizaje.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?q=DESPIERTA+MI+ANGELINA&&mid=621178B3CDC45BC0214D621178B3CDC45BC0214D&FORM=VAMGZC"
+      },
+      "py’akangy": {
+        guarani: "py’akangy",
+        espanol: "nostalgia, melancolía",
+        tema: "La dulce tristeza que acaricia el alma y recuerda tiempos pasados.",
+        titulo: "NDE ROVETÃME",
+        escritor: "TOMAS QUIROGA",
+        cantante: "Papi Meza y su Conjunto",
+        letra: `Tamyasaĩ nde rovetãme - Ñasaindy ratamimbi
+Purahei ndéve guarã - Ne renoirõ ojepoitýva
+Ko’ẽjúicha iporo’yva - Chave upéichante hi’ãva
+Che ñe’ãme guaremi - Romombay che jarami 
+
+Mborayhu hypy arekóva hatapyñaiva che asúpe
+Ha hendýva che jurúpe, che ñe’ẽ, kóina ajora
+Tahory, taipotypa, che moirũvo nde keguýpe
+Hendive nde rayhupápe toñatoĩ che mbaraka.
+
+"Edelmira" ko nde ypýpe, ne rokẽme isã ryrýiva
+Mbaraka ipu asýva ãngue kóima nde jopy.
+Amóinama kuarahy hembipe ára mboypýpe
+Ha jasýpe heruguáre omboguéma hataindy.
+
+Péina ápema yvytúre - Opáypa mymba mimi
+Oguãhe henyhembáva - Ha upekuévo yvotytýre
+Ka'aguy jurúgui osẽva - Akói ku hysýkuere
+Hyakuãnguéma isarambi - Mainumby sarakimi
+
+Epáymi che anga jára che moirũvo nde rokápe
+Remomorãvo nde páype che jave ko ko’ẽju
+Esẽmína ñahetũ mbyja ko’ẽ hesakãvo
+Ñane ñe’ã rupipávo herekua ára pytu
+
+Ambue panambi kuéra oha'i róga guýpe
+Heko rorýva torýpe tetakuére operere
+Ha che nde jára tee che ko’ẽ ne ra’arõvo
+Néina che resapévo eipe’a pe nerokẽ.`,
+        poema: `Py’akangy oĩ che rehe,
+Che korasõ oñemomba’e,
+Nde resa ha’e jey,
+Che rehe remimbi py’a.
+
+Ojepy’apy che remiandu,
+Peteĩ mba’e che py’a okaru,
+Nde resa ojapo nde rehe,
+Peteĩ ára ohasa jevy.`,
+        inspiracion: [
+          "La nostalgia alimenta el alma con recuerdos que nos moldean.",
+          "Permítete sentir la melancolía para entender quién eres.",
+          "Cada suspiro del pasado fortalece el presente."
+        ],
+        dato: "La música guaraní a menudo expresa el 'py’akangy' para conectar generaciones y raíces culturales.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=Nde+Rovet%c3%a3me&&mid=4606060453CCC93F0A824606060453CCC93F0A82&&FORM=VRDGAR"
+      },
+      "py’arasy": {
+        guarani: "py’arasy",
+        espanol: "Tristeza",
+        tema: "A través de una letra profundamente melancólica, el hablante revive una noche de luna hermosa donde nació una historia de amor, marcada por la ternura, el canto y el contacto íntimo. La canción transmite la tristeza por la distancia o la ausencia de la amada",
+        escritor: "ZULEMA DE MIRKÍN",
+        cantante: "Versión Tierra Dentro",
+        letra: `PETEÏ PYHARE ÑASAINDY PÖRÄME
+YPACARAÍPE JAJOKUAÁ
+PURAHÉI PYASY HEÑÖI CHE ÑE´ÄME
+ÑANE MBORAYHU MANDU´A HARÄ.
+
+NE ÑE´Ë YVOTY PURAHÉI ASYPE
+CHE MO PIRÏMBA PE NE KUNU´Ü
+HA UPE PYHARE ÑASAINDY PÖRÄME
+NDE JYVA KIRYÏ MOROTÏASYETE
+AÑANDU OÑUA KO CHE MBORAYHU.
+
+MAMOPA REIME KUÑATAÏMI
+AHENDUSETE KU NDE PURAHÉI
+MAMOPA CHE AMA REIME KO´ÄGÄ
+ROHECHASE...
+YPACARAI ROVYÜ SATÏ
+OIME OHESAPE NE RA´ANGAMI
+HA ROPURAHÉIVO AIKO ROHENOIVO
+KUÑATAÏ.`,
+        poema:`Apyta ne pore'yme ñembyasasyndie ñorairovo
+Ha mba'ehá nde reyuveiva che rendape che yvoty
+epensána michimi nde rayhuhaé opytava
+anivé nde recohare che mborayhú re ñoty.
+ 
+….. Mi esperanza yo te digo al nombrarte en esta estrofa
+….. aunque che anga ndaicuaáiva marové nde py'apy
+….. si tu piensas yo ya pienso de tenerte como esposa
+….. jha eyú yey icaturo ñambo pyajhú cunu'ú.`,
+        inspiracion: [
+          "En la tristeza profunda se gestan las semillas de la fortaleza.",
+          "Deja que el dolor te enseñe y te impulse a crecer.",
+          "La esperanza brilla aún en la noche más oscura."
+        ],
+        dato: "La palabra 'py’arasy' puede traducirse como 'dolor de alma', muy presente en la literatura y música paraguaya.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=recuerdos+de+ypacara%c3%ad+en+guarani+&&mid=EEA31624DE68DF061DAAEEA31624DE68DF061DAA&&FORM=VRDGAR "
+      },
+      "py’atarova": {
+        guarani: "py’atarova",
+        espanol: "Ansiedad",
+        tema: "El poeta se identifica con la Luna, porque ambos persiguen quimeras inalcanzables. Para él, es la mujer a quien le canta serenatas.",
+        titulo: "JASY MOROTĨ",
+        escritor: "DARÍO GÓMEZ SERRATO",
+        cantante: "Dúo Peña–González",
+        letra: `Jasy morotĩ remaña mombyrýva cherehe rehóvo
+Py'atarovágui márõ nderekévai cheichaite avei
+Ha chéicha remuñáva araka'eve jahupyty'ỹva
+Ndéko che reindy, jasy morotĩ, maña asymi.
+
+Ejehykuavóna ko kuñataĩ rogaguy porãme
+Jasy morotĩ ehesapemi ko che rendağua
+Añesũpehẽta ko hovetã guýpe ha aropurahéita
+Mba'asypo'ícha chepytéva oikóvo ko mba'epota.
+
+Rekevareína kuñataĩmi ahayhu porãva
+Epáy ehecha ne rokẽme oúva oñepomoĩ
+Tupãmba'ejára nerenoihaguéma hembe ruguypáma
+Ha nderechaségui yvága ru'ãre hesakã rei.
+
+Ka'aguy poty chemoakãnundúva nde pukavymíme
+Ha neryakuãngue rapykuéri aikóva anga atyryry
+Esẽ cherendápe he'ukámo chéve nde jurúgui eíra
+Tosopa anga ko che mbyay'uhéi, ka'aguy poty.
+
+Esẽ cherendápe... Ha nde apysaitépe tamombe'u ndéve
+Mba'éicha rupípa ko che mitãhápe aiko añembyasy.
+Che páy ha che kéra urutau rasẽicha che py'a jopýva
+Ha yvytu pirúicha che ruguy apére oikóva opoñy.
+
+Jasy morotĩ remaña mombyrýva cherehe rehóvo
+Nderekeihaguéma nderesa'yju cheichaite avei
+Ko'ẽramointénte rehasa hasa ha reiko reikóvo
+Chetavyhaguéma reikuaava'erã jasy morotĩ.`,
+        poema: `Py’atarova che rehe,
+Che korasõ oñembosarái,
+Peteĩ mba’e oipytyvõva,
+Che rehegua ñe’ẽpy.
+
+Oñeha’ã che py’a,
+Che rehegua ñe’ẽ,
+Py’atarova che rehe,
+Peteĩ mba’e iñimportánteva.`,
+        inspiracion: [
+          "La vergüenza sana el alma y nos guía hacia la verdad.",
+          "Acepta tus errores para crecer con dignidad.",
+          "Ser humilde es la mayor fortaleza del espíritu."
+        ],
+        dato: "En guaraní, el respeto y la vergüenza están profundamente ligados a la ética comunitaria.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=JASY+MOROT%c4%a8&&mid=A77217200220BFBE077AA77217200220BFBE077A&&FORM=VRDGAR"
+      },
+      "py’amirĩ": {
+        guarani: "py’amirĩ",
+        espanol: "temor, inseguro",
+        tema: "La sombra que protege y alerta, pero que no debe paralizarnos.",
+        titulo: "Che Py’amirĩ",
+        escritor: "CARLOS FEDERICO ABENTE",
+        cantante: "Jose Asunción Flores",
+        letra: `Jahypýi ko yvy tome’ê hi’a
+Ñamboapy ko sapukái
+yvytu vevére ñahendu iñe’ê
+ñande kóga purahéi.
+
+Ko’ê pytãngy, guyraita oñe’ê
+ndaipóri mba’e mbyasy
+kuarahy omimbi, jasy opukavy
+Oso mboriahu apytĩ.
+
+Ñañemitŷ
+taheñói yvy ári tory
+tojope kuarahy avatity
+tomyasãi mandyju panambi.
+
+Ñañemitŷ
+tahory ñande kéra yvoty
+toĝuahê tetãygua araite
+topu’ã Paraguay.
+
+Petŷ ha ka’a, manduvi ha yva
+maymáva ty’ái repy
+Takuare’êndýre mboriahueta
+oñohê hi’upyrã.
+
+Topa ñembyahýi, joayhu taheñói
+topu’ã ñane retã
+Ñañombyatypa ha jasapukái
+vy’ápe che retãygua.`,
+        poema: `Py’amirĩ ojapova’erã,
+Che rehegua mba’e vai,
+Peteĩ mba’e oguapyha,
+Che korasõ oñembyasýva.
+
+Temor ha’e mba’e potĩ,
+Oñemomba’e avei,
+Che rehegua ñe’ẽ,
+Peteĩ mba’e oñemomba’e.`,
+        inspiracion: [
+          "El temor es una voz interna que te avisa, no un muro para detenerte.",
+          "Abraza el miedo y conviértelo en impulso para avanzar.",
+          "Los valientes sienten temor, pero no se dejan dominar por él."
+        ],
+        dato: "En la cosmovisión guaraní, el temor es parte del equilibrio emocional y espiritual.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=%c3%91EMIT%c5%b6+jose+asuncion+flores&&mid=C89F9B5A3791D0C66681C89F9B5A3791D0C66681&&FORM=VRDGAR"
+      },
+      "py’aha’ã": {
+        guarani: "py’aha’ã",
+        espanol: "confusión",
+        tema: "La canción expresa el dolor de una despedida forzada. El hablante lírico (quien canta) decide alejarse de la persona que ama, no porque haya dejado de amarla, sino porque siente que no es correspondido de la misma forma o porque su amor no es suficiente para hacerla feliz.",
+        titulo: "AZUCENA MI POTY",
+        escritor: "Emiliano R. Fernandez",
+        cantante: "LOS GUAYAKIES - DUO BAEZ ROJAS",
+        letra: `Asëta ajha mombyry
+yayuechave'yn jhaguäme
+jha anive nde rayjhupápe
+amocö che resay
+nderejhe aipota iyaty
+yepiguáichante vy'a
+jha che tovente tajha
+che azucena mi poty.
+
+Cuarajhy'änte ra'e
+ajhechamiva che képe
+mborayjhu porä apytépe
+yaico ramo oñondive
+jha péinama voi asyete
+jhogue mano che yvoty
+jha oicóma iyajheipy
+che mborayjhu ypycue.
+
+Che aime vaerä mombyry
+mamo iñypytüvejhare
+jha nde reicóne ne acäre
+vy'apópe tupäsy
+jha che aicóne ambyasy
+reyapóva cherejhe
+nde poyjhu vai etaite
+che azucena mi poty.
+
+Oikecuévo cuarajhy
+ponientere ke emaña
+rejhecháne ndeyoguajha
+estrella ca'arupy
+nde kena che tupasy
+upéicha yave evy'a
+jha ere mombyry aimejha
+che azucena mi poty.
+
+Cu pyjhare piro'y
+reñenorö nde rupápe
+oguajhéne nde apysápe
+jha amo yvágagui yasy
+upérö nde resapéne
+jha che mombyry aiméne
+che azucena mi poty.
+
+Aga osëvo cuarajhy
+pe amo yvaga mboypýpe
+rejhendúne ca'aguýpe
+pycu'i oñe'e asy
+ndaicatúi yayupity
+jhe'ivaerä rejhendu
+ne corasö toñopü
+che azucena mi poty.`,
+        poema: `Py’aha’ã oñemomba’e,
+Che korasõ oñembyaty,
+Peteĩ mba’e ojapóva,
+Che rehegua añemomba’e.
+
+Che remiandu oñemopyenda,
+Peteĩ mba’e ipyahúva,
+Py’aha’ã oñemomba’e,
+Che rehegua py’a okaru.`,
+        inspiracion: [
+          "La confusión es el comienzo del aprendizaje verdadero.",
+          "Busca dentro de ti la luz que guía en la oscuridad.",
+          "El caos mental puede ser el camino a la claridad."
+        ],
+        dato: "En la tradición guaraní, la confusión es vista como un paso natural hacia la sabiduría.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=AZUCENA+MI+POTY&&mid=65BD0A6513CEBFC5CCC965BD0A6513CEBFC5CCC9&&FORM=VRDGAR"
+      },
+      "py’amokõi": {
+        guarani: "py’amokõi",
+        espanol: "Duda",
+        tema: "El peso que el alma y el cuerpo sienten después de la batalla diaria.",
+        titulo: "NDE RATYPYKUA",
+        escritor: "FÉLIX FERNÁNDEZ",
+        cantante: "JOSÉ ASUNCIÓN FLORES",
+        letra: `Epukavymína mitãkuña che mborayhujára
+Tahecha jevy nde juru mboypýri nde ratypykua,
+nde roya yképe ikuãme oikutúva'ekue Ñandejára
+ha ipyko’ẽmíva opyta opupu mborayhu ykua.
+ 
+Ka’aru pytữ jasy tomimbi nde rova mbytére
+ha tory rupápe toñoñañua ñane mborayhu
+tuka’ẽ ra’ãvo oñondivete tojeity ojuapére
+tojahu hikuái nde ratypykuápe upe ka’aru.
+ 
+Epukavymína mitãkuña che py’a ra’ãva
+hoy’umisetéko ipepo paráva upe ñahatĩ
+nde ratypykuápe guare ymínte oipy'a jukáva
+ha ipepo akãmínte omoakysete mokõi panambi.
+ 
+Nde rova yképe ikuãme oikutuva’ekue Ñandejára,
+ha ipyko’ẽmíva opyta opupu mborayhu ykua;
+repukavymírõ mitãkuña che mborayhu jára,
+taropurahéi nde juru mboypýri nde ratypykua.`,
+        poema: `Py’amokõi che korasõ,
+Oñembyasýva heta ára,
+Peteĩ mba’e oguahẽva,
+Che rehegua añemomba’e.
+
+Che pytu’u oñemohendu,
+Py’amokõi oñemomba’e,
+Peteĩ mba’e che rehe,
+Che korasõ oikuaa.`,
+        inspiracion: [
+          "El descanso es tan vital como la lucha.",
+          "Escucha a tu cuerpo y permítete recuperar energías.",
+          "La renovación viene después de aceptar el cansancio."
+        ],
+        dato: "El agotamiento es reconocido en la cultura guaraní como señal para la renovación espiritual y física.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=NDERATYPYKUA+-+JOSE+ASUNCION+FLORES&&mid=55A4CAF23A001D1B587355A4CAF23A001D1B5873&&FORM=VRDGAR"
+      },
+      "py’atĩ": {
+        guarani: "py’atĩ",
+        espanol: "sorpresa, asombro",
+        tema: "El instante en que el alma se abre al misterio de la vida.",
+        titulo: "CHE PUEBLO PÕRÃ",
+        escritor: "Mauricio Cardozo Ocampo",
+        cantante: "Amambay Cardozo Ocampo con Marizza",
+        letra: `Ajúnte rohechami mombyry asyetégui
+heta rohechaga’u nde che pueblomi;
+tamoasâími nde rokáre che py’aitégui
+che purahéi kunu’ũ ryakuã pacholi.
+Bandada korochire péina che moirũma
+aponderami haguã ne marangutu.
+Akóinte hyakuã porã mayma nde yvoty mitãkuñaita
+ha itekove ne mitã rusu che pueblo porã.
+Vy’águinte che rasẽ ahenduvove ne campana pu
+Ha péina pype hekoviapaite ko techaga’u.
+
+Péina Arasaty, hovái Costa Hũ ha Paso Paré,
+péina Rincon’i, Cerro Tatu Kua
+ha Isla Pa’ũ che vy’ahague.
+Oime Cordillera yvága rovái ñu hovy porã
+pépe opurahéi ku Salto Cristal
+ko che purahéipe tamoherakuã.
+
+Tapurahéi Takuary, cuna del Centauro,
+hovái oime Minas Kue mandu’aiteha
+upépe oikova’ekue-ku cañón "Cristiano"
+heta ñane defende pe guerra aja.
+Oime avei Entre Ríos ysyry pa’ũme.
+Kurukáu ha Ytaypa chupe ombojegua.
+Ha pe pueblo rembe’ýpe ikoni koni ku Paso Sabrá
+omboguepaitéva ku mbyry’ái ysyry porã.
+Vy’águinte che rasẽ ahenduvove ne campana pu
+Ha peína pype hekoviapaite ko techaga’u.
+
+Sapy’ánte che ko’ẽ opa che pytu, pueblo Ybycuí,
+mba’éichatamo upe nde nde pohéi apytu’umi.u`,
+        poema: `Py’atĩ che korasõre,
+Oñemomba’e heta mba’e,
+Peteĩ ára porãvéva,
+Che rehegua añemomba’e.
+
+Che remiandu oñemopyenda,
+Peteĩ mba’e pyahu,
+Py’atĩ ohechávo,
+Che rehegua jehepy'u.`,
+        inspiracion: [
+          "La sorpresa es la chispa que enciende la curiosidad.",
+          "Abre tu corazón a lo inesperado y aprende.",
+          "Cada asombro es una puerta a nuevas experiencias."
+        ],
+        dato: "La sorpresa se celebra en cantos guaraníes como el inicio de la sabiduría.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=CHE+PUEBLO+P%c3%95R%c3%83&&mid=D186F800F43A4A8B3C7ED186F800F43A4A8B3C7E&&FORM=VRDGAR"
+      },
+      "py’aguasu": {
+        guarani: "py’aguasu",
+        espanol: "Valentia",
+        tema: "El abismo emocional que desafía al alma a crecer y sanar.",
+        titulo: "Py’aguasu Che Korasõ",
+        escritor: "Víctor Heredia",
+        cantante: "Ricardo Flecha y Víctor Heredia",
+        letra: `Mba'eicha rupi apurahéi ko ñembyasy
+ndaha'éi ramo peteî purahéi año
+mba'eichamo ajerure terejerovia
+ko che rete yhuéi voíva che ave,
+ko'e ko ẽre jaheche ohasa
+umi pytagua ytyapy rupi
+ñesãso kerapoty...
+
+Py'aguasu, py'aguasu,
+ojoykerepa ñaimérõ ñane ñe'a
+amerikagua opu'ãne omimbi, overa.
+
+Mbaéichagua ygára tuicha hovy
+ñaikotevẽ ñambojavy haguã
+mba'epochy poguýgui tañasẽmi
+ani haguã ñane sãsótei omomarã
+oime ikatu ne ñe'ãme reñongatu
+sapy'ami jepe ne rembipota
+oguereháva nde rayhuha ñe´ẽ.
+
+Okẽ ojepe'ávake eropojái
+nde rógape toguahẽ yvytu
+ñande yvoty kuéragui ku hyakuã
+toñemoña joá yvy tuichakue
+ñembyahyi ári toho py'aguasu
+ha mborayhu tove topu´ã
+toveve ñanendive ko purahéi.`,
+        poema: `Py’aguasu che korasõ,
+Oñembyahýiva heta ára,
+Peteĩ mba’e oguahẽva,
+Che rehegua añemomba’e.
+
+Che pytu’u oñemohendu,
+Py’aguasu oñemomba’e,
+Peteĩ mba’e che rehe,
+Che korasõ oikuaa.`,
+        inspiracion: [
+          "Del dolor más profundo puede nacer la fuerza más grande.",
+          "Permítete sentir, para que el alma pueda sanar.",
+          "La tristeza es parte del camino hacia la luz."
+        ],
+        dato: "En la cosmovisión guaraní, el dolor profundo es un maestro que transforma el espíritu.",
+        youtube: "https://www.bing.com/videos/riverview/relatedvideo?&q=Py%27aguasu+(V%c3%adctor+Heredia)&&mid=941926FE5CE81B01A020941926FE5CE81B01A020&&FORM=VRDGAR"
+      }
+    };
+
+    function buscar() {
+      const input = document.getElementById("inputSentimiento").value.trim().toLowerCase();
+      const resultadoDiv = document.getElementById("resultado");
+
+      if (!input) {
+        resultadoDiv.innerHTML = "<p>Por favor, ingresa un sentimiento en guaraní o español para buscar.</p>";
+        return;
+      }
+
+      // Buscar por guaraní o español
+      let encontrado = null;
+      for (const key in sentimientos) {
+        // --- LA CORRECCIÓN ESTÁ AQUÍ ---
+        // Se cambió la comparación exacta (===) por .includes() para que encuentre
+        // una palabra dentro de una frase (ej: buscar "alegría" en "alegría, gozo").
+        if (key.toLowerCase() === input || sentimientos[key].espanol.toLowerCase().includes(input)) {
+          encontrado = sentimientos[key];
+          break;
+        }
+      }
+
+      if (encontrado) {
+        resultadoDiv.innerHTML = `
+          <div><span class="campo-titulo">Traducción:</span> ${encontrado.espanol}</div>
+          <div><span class="campo-titulo">Título de la canción:</span> ${encontrado.titulo}</div>
+          <div><span class="campo-titulo">Escritor:</span> ${encontrado.escritor}</div>
+          <div><span class="campo-titulo">Cantante:</span> ${encontrado.cantante}</div>
+          <div><span class="campo-titulo">Tema:</span> ${encontrado.tema || "Desconocido"}</div>
+          <iframe src="${encontrado.youtube}" allowfullscreen></iframe>
+          <div class="campo-titulo">Letra:</div>
+          <div class="letra">${encontrado.letra}</div>
+          <section>
+            <h2>Poema inspirado en el sentimiento</h2>
+            <blockquote>${encontrado.poema.replace(/\n/g, '<br>')}</blockquote>
+          </section>
+          <section>
+            <h2>Frases inspiradoras</h2>
+            <ul>
+              ${encontrado.inspiracion.map(frase => `<li class="inspiracion">"${frase}"</li>`).join('')}
+            </ul>
+          </section>
+          <section class="dato-interesante">
+            <strong>Dato interesante:</strong> ${encontrado.dato}
+          </section>
+        `;
+      } else {
+        resultadoDiv.innerHTML = `<p>No se encontró una canción para ese sentimiento. Intenta con otro.</p>`;
+      }
+    }
+
+    function seleccionarSentimiento() {
+      const seleccion = document.getElementById("selectSentimiento").value;
+      document.getElementById("inputSentimiento").value = seleccion;
+      buscar();
+    }
+  </script>
+</body>
+</html>
